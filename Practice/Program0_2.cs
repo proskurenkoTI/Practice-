@@ -1,12 +1,19 @@
 ﻿using System;
 
-public class Programm0_2
+public class Program0_2
 {
     public static void Main()
     {
-        string input = string.Empty;
         double temperature;
         string scaleValue = string.Empty;
+
+        dataReading(out temperature, out scaleValue);
+        outputResult(scaleValue, temperature);
+    }
+    public static void dataReading(out double temperature, out string scaleValue)
+    {
+        string input = string.Empty;
+        
         bool isValidInput;
         do
         {
@@ -23,7 +30,9 @@ public class Programm0_2
             }
         }
         while (!isValidInput || (scaleValue.ToUpper() != "C" && scaleValue.ToUpper() != "F"));
-
+    }
+    public static void outputResult(string scaleValue, double temperature)
+    {
         if (scaleValue == "C" || scaleValue == "c")
         {
             Console.WriteLine($"Результат: {Math.Round((temperature * 9) / 5 + 32)}F");
