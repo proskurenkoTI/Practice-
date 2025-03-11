@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Formats.Asn1.AsnWriter;
 
-public class Program2
+public class Program1_2
 {
     public static void Main()
     { 
