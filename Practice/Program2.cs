@@ -7,8 +7,6 @@ public class StoreDataTask
     public double a { get; }
     public double b { get; }
     public double c { get; }
-    public double dd;
-     
     public StoreDataTask(double a, double b, double c)
     {
         if (a <= 0)
