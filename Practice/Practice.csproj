@@ -5,7 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>Program1_1</StartupObject>
+    <StartupObject>Program2</StartupObject>
   </PropertyGroup>
 
 </Project>
