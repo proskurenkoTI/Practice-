@@ -10,14 +10,7 @@ public class StoreDataTask
 
     public StoreDataTask(double a, double b, double c)
     {
-        if (a <= 0)
-        {
-            Console.WriteLine("Коэф. а не может быть отриц.");
-        }
-        else
-        {
-            this.a = a; this.b = b; this.c = c;
-        } 
+        this.a = a; this.b = b; this.c = c;
     }
 }
 
@@ -25,7 +18,6 @@ public class SolutionMethods
 {
     private StoreDataTask _fridge;
     private double discriminant;
-    public static List<string> typeSolution = new List<string> { "oneRoot", "twoRoot", "noRoot" };
 
     private void CalculateDiscriminant()
     {
@@ -52,59 +44,48 @@ public class SolutionMethods
     {
         CalculateDiscriminant();
 
-        if (discriminant > 0)
+        if (_fridge.a <= 0)
+        {
+            return new StoreDataSolution(-1);
+        }
+        else if (discriminant > 0)
         {
             double x1 = CalculateFirstRoot();
             double x2 = CalculateSecondRoot();
-            return new StoreDataSolution(x1, x2, typeSolution[1]);
+            return new StoreDataSolution(x1, x2, 2);
         }
         else if (discriminant == 0) 
         {
             double x = CalculateSingleRoot();
-            return new StoreDataSolution(x, typeSolution[0]);
+            return new StoreDataSolution(x, 1);
         }
         else
         {
-            return new StoreDataSolution(typeSolution[2]);
+            return new StoreDataSolution(3);
         }
     }
 }
 
 public class StoreDataSolution
 {
-    double x1;
-    double x2;
-    double x;
-    string typeSolution;
-    public StoreDataSolution(double x1, double x2, string typeSolution)
+    public double x1;
+    public double x2;
+    public double x;
+    public int typeSolution;
+    public StoreDataSolution(double x1, double x2, int typeSolution)
     {
         this.x1 = x1;
         this.x2 = x2;
         this.typeSolution = typeSolution;
     }
-    public StoreDataSolution(double x, string typeSolution)
+    public StoreDataSolution(double x, int typeSolution)
     {
         this.x = x;
         this.typeSolution = typeSolution;
     }
-    public StoreDataSolution(string typeSolution)
+    public StoreDataSolution(int typeSolution)
     {
         this.typeSolution = typeSolution;
-    }
-    public void PrintSolution()
-    {
-        if (typeSolution == "oneRoot")
-        {
-            Console.WriteLine($"Уравнение имеет один корень: {x}");
-        }
-        else if (typeSolution == "twoRoot")
-        {
-            Console.WriteLine($"Уравнение имеет два корня: {x1}, {x2}");
-        }
-        else if (typeSolution == "noRoot")
-        {
-            Console.WriteLine("Уравнение не имеет корней");
-        }
     }
 }
 
@@ -130,7 +111,25 @@ public class Program2
         StoreDataTask task = new StoreDataTask(a, b, c);
         SolutionMethods solver = new SolutionMethods(task);
         StoreDataSolution solution = solver.SolveQuadrEquation();
-
-        solution.PrintSolution();
+        PrintSolution(solution);
+    }
+    public static void PrintSolution(StoreDataSolution solution)
+    {
+        if (solution.typeSolution == 1)
+        {
+            Console.WriteLine($"Уравнение имеет один корень: {solution.x}");
+        }
+        else if (solution.typeSolution == 2)
+        {
+            Console.WriteLine($"Уравнение имеет два корня: {solution.x1}, {solution.x2}");
+        }
+        else if (solution.typeSolution == 3)
+        {
+            Console.WriteLine("Уравнение не имеет корней");
+        }
+        else if (solution.typeSolution == -1)
+        {
+            Console.WriteLine("Коэф. а не может быть отриц.");
+        }
     }
 }
