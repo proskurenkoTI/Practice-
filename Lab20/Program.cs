@@ -20,24 +20,6 @@ public class SolutionMethods
 {
     private StoreDataTask _fridge;
     private double discriminant;
-
-    private void CalculateDiscriminant()
-    {
-        discriminant = Math.Pow(_fridge.b, 2) - 4 * _fridge.a * _fridge.c;
-    }
-    private double CalculateFirstRoot()
-    {
-        return (-_fridge.b + Math.Sqrt(discriminant)) / (2 * _fridge.a);
-    }
-    private double CalculateSecondRoot()
-    {
-        return (-_fridge.b - Math.Sqrt(discriminant)) / (2 * _fridge.a);
-    }
-    private double CalculateSingleRoot()
-    {
-        return -_fridge.b / (2 * _fridge.a);
-    }
-
     public SolutionMethods(StoreDataTask fridge)
     {
         _fridge = fridge;
@@ -65,6 +47,22 @@ public class SolutionMethods
         {
             return new StoreDataSolution(3);
         }
+    }
+    private void CalculateDiscriminant()
+    {
+        discriminant = Math.Pow(_fridge.b, 2) - 4 * _fridge.a * _fridge.c;
+    }
+    private double CalculateFirstRoot()
+    {
+        return (-_fridge.b + Math.Sqrt(discriminant)) / (2 * _fridge.a);
+    }
+    private double CalculateSecondRoot()
+    {
+        return (-_fridge.b - Math.Sqrt(discriminant)) / (2 * _fridge.a);
+    }
+    private double CalculateSingleRoot()
+    {
+        return -_fridge.b / (2 * _fridge.a);
     }
 }
 
@@ -95,25 +93,50 @@ public class Program2
 {
     public static void Main()
     {
-        string input;
         double a;
         double b;
         double c;
-        bool isValidInput;
-        Console.WriteLine("Введите а:");
-        input = Console.ReadLine();
-        isValidInput = double.TryParse(input, out a);
-        Console.WriteLine("Введите b:");
-        input = Console.ReadLine();
-        isValidInput = double.TryParse(input, out b);
-        Console.WriteLine("Введите c:");
-        input = Console.ReadLine();
-        isValidInput = double.TryParse(input, out c);
 
+        ReadData(out a, out b, out c);
         StoreDataTask task = new StoreDataTask(a, b, c);
         SolutionMethods solver = new SolutionMethods(task);
         StoreDataSolution solution = solver.SolveQuadrEquation();
         PrintSolution(solution);
+    }
+    public static void ReadData(out double a, out double b, out double c)
+    {
+        string input;
+        bool isValidInput;
+        do 
+        {
+            Console.WriteLine("Введите а:");
+            input = Console.ReadLine();
+            isValidInput = double.TryParse(input, out a);
+            if (!isValidInput)
+            {
+                Console.WriteLine("Некорректный ввод.");
+            }
+        } while (!isValidInput);
+        do
+        {
+            Console.WriteLine("Введите b:");
+            input = Console.ReadLine();
+            isValidInput = double.TryParse(input, out b);
+            if (!isValidInput)
+            {
+                Console.WriteLine("Некорректный ввод.");
+            }
+        } while (!isValidInput);
+        do
+        {
+            Console.WriteLine("Введите c:");
+            input = Console.ReadLine();
+            isValidInput = double.TryParse(input, out c);
+            if (!isValidInput)
+            {
+                Console.WriteLine("Некорректный ввод.");
+            }
+        } while (!isValidInput);
     }
     public static void PrintSolution(StoreDataSolution solution)
     {
