@@ -20,12 +20,10 @@ public class SolutionMethods
 {
     private StoreDataTask _fridge;
     private double discriminant;
-    public SolutionMethods(StoreDataTask fridge)
+
+    public StoreDataSolution SolveQuadrEquation(StoreDataTask fridge)
     {
         _fridge = fridge;
-    }
-    public StoreDataSolution SolveQuadrEquation()
-    {
         CalculateDiscriminant();
 
         if (_fridge.a <= 0)
@@ -99,8 +97,8 @@ public class Program2
 
         ReadData(out a, out b, out c);
         StoreDataTask task = new StoreDataTask(a, b, c);
-        SolutionMethods solver = new SolutionMethods(task);
-        StoreDataSolution solution = solver.SolveQuadrEquation();
+        SolutionMethods solver = new SolutionMethods();
+        StoreDataSolution solution = solver.SolveQuadrEquation(task);
         PrintSolution(solution);
     }
     public static void ReadData(out double a, out double b, out double c)
