@@ -6,7 +6,7 @@ class Program
     {
         //Task01();
         //Task02();
-        //Task03();
+        Task03();
     }
     static void Task01()
     {
@@ -92,23 +92,19 @@ class Program
         };
         List<Employee> findYear = new List<Employee>();
         List<Employee> findSort = new List<Employee>();
+        List<Employee> findPost = new List<Employee>();
 
         EmployeeHelper helper  = new EmployeeHelper();
 
         findYear = helper.SearchGreatestExperience(employees);
-        foreach(var employee in findYear)
-        {
-            helper.PrintEmployee(employee);
-        }
+        helper.PrintEmployees(findYear);
 
         Console.Write("Введите должность: ");
-        helper.PrintEmployeePost(employees, Console.ReadLine());
+        findPost = helper.FindEmployeePost(employees, Console.ReadLine());
+        helper.PrintEmployees(findPost);
 
         Console.WriteLine("SORT");
         findSort = helper.SortByValue(employees);
-        foreach (var employee in findSort)
-        {
-            helper.PrintEmployee(employee);
-        }
+        helper.PrintEmployees(findSort);
     }
 }

@@ -103,39 +103,28 @@ public class Program2
     }
     public static void ReadData(out double a, out double b, out double c)
     {
+        a = ReadPart("Введите a: ");
+        b = ReadPart("Введите b: ");
+        c = ReadPart("Введите с: ");
+    }
+    public static double ReadPart(string enter)
+    {
         string input;
         bool isValidInput;
+        double result;
         do 
         {
-            Console.WriteLine("Введите а:");
+            Console.WriteLine(enter);
             input = Console.ReadLine();
-            isValidInput = double.TryParse(input, out a);
+            isValidInput = double.TryParse(input, out result);
             if (!isValidInput)
             {
                 Console.WriteLine("Некорректный ввод.");
             }
         } while (!isValidInput);
-        do
-        {
-            Console.WriteLine("Введите b:");
-            input = Console.ReadLine();
-            isValidInput = double.TryParse(input, out b);
-            if (!isValidInput)
-            {
-                Console.WriteLine("Некорректный ввод.");
-            }
-        } while (!isValidInput);
-        do
-        {
-            Console.WriteLine("Введите c:");
-            input = Console.ReadLine();
-            isValidInput = double.TryParse(input, out c);
-            if (!isValidInput)
-            {
-                Console.WriteLine("Некорректный ввод.");
-            }
-        } while (!isValidInput);
+        return result;
     }
+    
     public static void PrintSolution(StoreDataSolution solution)
     {
         if (solution.typeSolution == 1)

@@ -4,37 +4,41 @@ class EmployeeHelper
 {
     public List<Employee> SearchGreatestExperience(List<Employee> employees)
     {
-        Dictionary<Employee, int> result = new Dictionary<Employee, int>();
-        List<Employee> conclusion = new List<Employee>();
-        foreach (var employee in employees)
+        List<Employee> list = new List<Employee>();
+        int counter = employees[0].HireYear;
+        foreach(var employee in employees)
         {
-            result[employee] = (2025 - employee.HireYear);
-        }
-        int counter = 0;
-        foreach (var employee in result) 
-        {
-            if (employee.Value > counter)
+            if (employee.HireYear < counter)
             {
-                counter = employee.Value;
+                counter = employee.HireYear;
             }
         }
-        foreach (var employee in result)
+        foreach(var employee in employees)
         {
-            if (employee.Value == counter)
+            if (employee.HireYear == counter)
             {
-                conclusion.Add(employee.Key);
+                list.Add(employee);
             }
         }
-        return conclusion;
+        return list;
     }
-    public void PrintEmployeePost(List<Employee> employees, string post)
+    public List<Employee> FindEmployeePost(List<Employee> employees, string post)
     {
+        List<Employee> postsEmployee = new List<Employee>();
         foreach(var employee in employees)
         {
             if (employee.Post == post)
             {
-                PrintEmployee(employee);
+                postsEmployee.Add(employee);
             }
+        }
+        return postsEmployee;
+    }
+    public void PrintEmployees(List<Employee> employees)
+    {
+        foreach(var employee in employees)
+        {
+            PrintEmployee(employee);
         }
     }
     public void PrintEmployee(Employee employee)
